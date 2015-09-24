@@ -66,11 +66,7 @@ class CodeGrid(mFile: MeasuredFile, sourceEncoding: Option[String]) {
   }
 
   private def source(mfile: MeasuredFile): String = {
-    val src = sourceEncoding match {
-     case Some(enc) => Source.fromFile(mfile.source, enc)
-     case None => Source.fromFile(mfile.source)
-    }
-    src.mkString
+    Source.fromFile(mfile.source, sourceEncoding.getOrElse("UTF-8")).mkString
   }
 
   private def spanStart(status: StatementStatus): String = s"<span style='${cellStyle(status)}'>"
